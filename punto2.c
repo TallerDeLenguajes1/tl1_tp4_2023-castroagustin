@@ -43,6 +43,16 @@ int main() {
     // mostrarTareas(tareas, numTareas);
     buscarTareaPorId(tareas, tareasRealizadas, numTareas);
     buscarTareaPorPalabra(tareas, tareasRealizadas, numTareas);
+
+    for (int i = 0; i < numTareas; i++) {
+        free(tareas[i]->desc);
+        free(tareas[i]);
+        free(tareasRealizadas[i]);
+    }
+    
+    free(tareas);
+    free(tareasRealizadas);
+    
     return 0;
 }
 

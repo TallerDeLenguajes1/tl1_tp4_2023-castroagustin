@@ -12,6 +12,7 @@ struct {
 void mostrarTareas(Tarea *tareas[], int cantTareas);
 void moverTareas(Tarea *tareas[], Tarea *tareasRealizadas[], int cantTareas);
 void mostrarTareasRealizadas(Tarea *tareas[], int cantTareas);
+void buscarTarea(Tarea *tareas[], Tarea *tareasRealizadas[], int cantTareas);
 
 int main() {
     int numTareas;
@@ -39,6 +40,7 @@ int main() {
     moverTareas(tareas,tareasRealizadas, numTareas);
     mostrarTareasRealizadas(tareasRealizadas, numTareas);
     // mostrarTareas(tareas, numTareas);
+    buscarTarea(tareas, tareasRealizadas, numTareas);
     return 0;
 }
 
@@ -88,3 +90,26 @@ void mostrarTareasRealizadas(Tarea *tareas[], int cantTareas) {
 }
 
 
+void buscarTarea(Tarea *tareas[], Tarea *tareasRealizadas[], int cantTareas) {
+    char palabra[20];
+    printf("Ingrese palabra clave: ");
+    fflush(stdin);
+    gets(palabra);
+    for (int i = 0; i < cantTareas; i++) {
+        if (tareas[i]!=NULL && (strstr(tareas[i]->desc, palabra) != NULL)) {
+            printf("PENDIENTE\n");
+            printf("ID de la tarea: %d\n", tareas[i]->tareaID);
+            printf("Descripcion: ");
+            puts(tareas[i]->desc);
+            printf("Duracion: %d\n", tareas[i]->duracion);
+            break;
+        } else if (tareasRealizadas[i]!=NULL && (strstr(tareasRealizadas[i]->desc, palabra) != NULL)) {
+            printf("REALIZADA\n");
+            printf("ID de la tarea: %d\n", tareasRealizadas[i]->tareaID);
+            printf("Descripcion: ");
+            puts(tareasRealizadas[i]->desc);
+            printf("Duracion: %d\n", tareasRealizadas[i]->duracion);
+            break;
+        }
+    }
+}
